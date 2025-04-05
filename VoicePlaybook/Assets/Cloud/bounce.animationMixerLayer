@@ -1,0 +1,17 @@
+- !<AnimationMixerLayer/9c296c4e-c08e-440b-ae9c-2864b3a0f019>
+  PackagePath: ""
+  Layer: bounce
+  Name: bounce
+  Weight: 1.000000
+  SpeedRatio: 1.000000
+  From: 0.000000
+  To: 2.500000
+  Offset: 0.000000
+  FPS: 30.000000
+  NumCycles: -1
+  Reversed: false
+  Disabled: false
+  PostInfinity: Cycle
+  BlendMode: Default
+  ScaleMode: Multiply
+  RangeType: TimeInSeconds

@@ -1,4 +1,4 @@
-import { Interactable } from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable";
+import { Interactable } from "../SpectaclesInteractionKit/Components/Interaction/Interactable/Interactable";
 import { MicrophoneRecorder } from "./MicrophoneRecorder";
 
 @component

@@ -1,5 +1,5 @@
 require("LensStudio:RawLocationModule");
-import { Interactable } from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable";
+import { Interactable } from "../SpectaclesInteractionKit/Components/Interaction/Interactable/Interactable";
 import { MicrophoneRecorder } from "./MicrophoneRecorder";
 
 
@@ -41,6 +41,10 @@ export class SendAudioToFirebase extends BaseScriptComponent {
     const combinedAudioBuffer = this.combineAudioFrames(audioData);
 
     let locationData = await this.getLocationData();
+
+    print(locationData.longitude);
+    print(locationData.latitude);
+    print(locationData.altitude);
 
 
     const formData = {
