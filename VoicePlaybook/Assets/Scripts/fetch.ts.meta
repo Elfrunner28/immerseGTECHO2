@@ -28,6 +28,7 @@
   ScriptInputsHidden:
     audioComponent: false
     interactable: false
+    locationExample: false
     notePrefab: false
   ScriptTypesHidden:
     {}
@@ -36,6 +37,7 @@
     - notePrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
       audioComponent: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       interactable: !<MappingBased.Interactable> 00000000-0000-0000-0000-000000000000
+      locationExample: !<MappingBased.locationExample> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -43,3 +45,4 @@
     - // @input Asset.ObjectPrefab notePrefab
     - // @input Component.AudioComponent audioComponent
     - // @input Interactable interactable
+    - // @input locationExample locationExample

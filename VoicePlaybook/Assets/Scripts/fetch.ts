@@ -2,6 +2,7 @@ import { Interactable } from "../SpectaclesInteractionKit/Components/Interaction
 // InteractorEvent is not explicitly used after the changes, but might be useful for other interactions
 // import { InteractorEvent } from "SpectaclesInteractionKit/Core/Interactor/InteractorEvent";
 import NativeLogger from "../SpectaclesInteractionKit/Utils/NativeLogger"; // Added import for logging
+import { LocationExample } from "./locationExample";
 
 declare function atob(str: string): string;
 
@@ -21,6 +22,8 @@ export class FetchNote extends BaseScriptComponent {
 
     @input interactable: Interactable;
 
+    @input locationExample: LocationExample;
+
     private remoteServiceModule: RemoteServiceModule = require('LensStudio:RemoteServiceModule');
     private remoteMediaModule: RemoteMediaModule = require('LensStudio:RemoteMediaModule');
     private repeatUpdateLocation!: DelayedCallbackEvent;
@@ -33,20 +36,12 @@ export class FetchNote extends BaseScriptComponent {
         log.d("FetchNote Script Awake");
         print("FetchNote Script Awake");
 
-        // Bind the onStart function to the OnStartEvent
-        this.createEvent("OnStartEvent").bind(() => {
-            this.onStart();
-        });
-
-        // Setup the repeating timer for location updates
-        this.repeatUpdateLocation = this.createEvent("DelayedCallbackEvent");
-        this.repeatUpdateLocation.bind(() => {
-            log.d("Updating location and fetching notes...");
-            print("Updating location and fetching notes...");
+        this.createEvent("UpdateEvent").bind(() => {
             this.updateLocationAndFetch();
-            // Reset the timer to run again after 2 seconds
-            this.repeatUpdateLocation.reset(2.0); // Update every 2 seconds
-        });
+            //print("Update event triggered");
+          });
+
+        // Setup the repeating timer for location update
 
         // Optional: Run simulation test on awake for debugging in Lens Studio
         // this.runSimulationTest(); // Uncomment if needed for testing
@@ -73,6 +68,8 @@ export class FetchNote extends BaseScriptComponent {
         // this.createButton.onInteractorTriggerStart(onTriggerStartCallback);
     }
 
+    private initalized: boolean = false;
+
     private updateLocationAndFetch() {
         // Clear previously instantiated notes (optional, depends on desired behavior)
         // If you want notes to persist across updates, remove this loop.
@@ -85,9 +82,8 @@ export class FetchNote extends BaseScriptComponent {
         this.instantiatedNotes = []; // Reset the array
  */
         // Get current location
-        const locationService = GeoLocation.createLocationService();
-        locationService.getCurrentPosition(
-            (pos) => {
+        if (!this.initalized) {
+            this.locationExample.getData((pos) => {
                 log.d(`Location acquired: Lat ${pos.latitude}, Lon ${pos.longitude}`);
                 print(`Location acquired: Lat ${pos.latitude}, Lon ${pos.longitude}`);
                 this.fetchAndDisplayNearbyNotes(
@@ -95,12 +91,9 @@ export class FetchNote extends BaseScriptComponent {
                     pos.longitude,
                     pos.altitude || 0 // Use 0 if altitude is not available
                 );
-            },
-            (err) => {
-                log.e("GPS error: " + err); // Use log.e for errors
-                print("GPS error: " + err);
-            }
-        );
+                this.initalized = true;
+            });
+        }
     }
 
     private async fetchAndDisplayNearbyNotes(
@@ -117,50 +110,45 @@ export class FetchNote extends BaseScriptComponent {
         try {
             const request = new Request(url, { method: "GET" });
             const response = await this.remoteServiceModule.fetch(request);
-
+            print("checkpoint 1");
             if (response.status !== 200) {
                 log.e(`Failed to fetch notes. Status: ${response.status}`);
                 print(`Failed to fetch notes. Status: ${response.status}`);
                 return;
             }
-
+            print("checkpoint 2");
             const notes = await response.json();
             log.d(`Received ${notes.length} notes from backend.`);
             print(`Received ${notes.length} notes from backend.`);
             // print("Notes data: " + JSON.stringify(notes)); // Uncomment for detailed data logging
 
-            const cam = (global.scene as any).getMainCamera();
-            if (!cam) {
-                log.e("Could not get main camera!");
-                print("Could not get main camera!");
-                return;
-            }
-            const userPos = cam.getTransform().getWorldPosition();
+            print("checkpoint 3");
 
+            print("checkpoint 4");
             notes.forEach((note: any) => {
                 // Basic validation of note data
-                if (note.latitude === undefined || note.longitude === undefined || !note.type) {
+                if (note.latitude === undefined || note.longitude === undefined) {
                     log.w("Skipping note due to missing data: " + JSON.stringify(note));
                     print("Skipping note due to missing data: " + JSON.stringify(note));
                     return; // Skip this note if essential data is missing
                 }
-
+                print("checkpoint 5");
                 const noteLat = parseFloat(note.latitude);
                 const noteLon = parseFloat(note.longitude);
                 const noteAlt = parseFloat(note.altitude || '0'); // Use 0 if altitude is missing
-
+                print("checkpoint 6");
                 if (isNaN(noteLat) || isNaN(noteLon) || isNaN(noteAlt)) {
                     log.w("Skipping note due to invalid coordinate data: " + JSON.stringify(note));
                     print("Skipping note due to invalid coordinate data: " + JSON.stringify(note));
                     return; // Skip if coordinates are not valid numbers
                 }
-
+                print("checkpoint 7");
                 // Calculate offset relative to the user
                 const offset = this.gpsOffsetVec3(
                     userLat, userLon, userAlt,
                     noteLat, noteLon, noteAlt
                 );
-
+                print("checkpoint 8");
                 // Check distance - Convert radiusMeters if needed, or use the offset length directly
                 // The original code checked offset.length > 15.24, which seems correct for the 50ft radius
                 if (offset.length > radiusMeters) {
@@ -168,27 +156,28 @@ export class FetchNote extends BaseScriptComponent {
                     // print(`Note too far (${offset.length.toFixed(2)}m > ${radiusMeters}m), skipping.`);
                     return; // Skip notes outside the radius
                 }
-
+                print("checkpoint 9");
                 // --- Instantiate the Note Prefab ---
                 if (!this.notePrefab) {
                     log.e("notePrefab is not assigned in the Inspector!");
                     print("notePrefab is not assigned in the Inspector!");
                     return; // Stop processing if prefab isn't set
                 }
-                const noteObj = this.notePrefab.instantiate(this.getSceneObject());
+                const noteObj = this.notePrefab.instantiate(null);
+                print("instantiated note prefab");
                 if (!noteObj) {
                     log.e("Failed to instantiate notePrefab!");
                     print("Failed to instantiate notePrefab!");
                     return; // Stop if instantiation failed
                 }
-
+                print("checkpoint 10");
                 // Add to list for potential cleanup later
                 this.instantiatedNotes.push(noteObj);
-
+                print("checkpoint 11");
                 // Position the note object relative to the user
                 // Scaling the offset might be needed depending on your scene scale
-                noteObj.getTransform().setWorldPosition(userPos.add(offset)); // Adjust scaling if necessary (e.g., offset.uniformScale(0.1))
-
+                noteObj.getTransform().setWorldPosition(offset); // Adjust scaling if necessary (e.g., offset.uniformScale(0.1))
+                print("checkpoint 12");
                 log.d(`Instantiated note at offset: ${offset.toString()}`);
                 print(`Instantiated note at offset: ${offset.toString()}`);
 
@@ -288,21 +277,16 @@ export class FetchNote extends BaseScriptComponent {
     }
 
     // Calculates the world space offset vector from user GPS to note GPS
-    private gpsOffsetVec3(
-        userLat: number, userLon: number, userAlt: number,
-        noteLat: number, noteLon: number, noteAlt: number
-    ): vec3 {
-        const metersPerDegLat = 111320.0; // Approx meters per degree latitude
-        // Approx meters per degree longitude (adjusts based on latitude)
-        const metersPerDegLon = 111320.0 * Math.cos(userLat * Math.PI / 180.0);
-
-        const dx = (noteLon - userLon) * metersPerDegLon; // East-West difference in meters
-        const dz = (noteLat - userLat) * metersPerDegLat; // North-South difference in meters (Lens Studio Z is often depth/North)
-        const dy = noteAlt - userAlt;                      // Vertical difference in meters
-
-        // Return the offset vector (Check axis conventions: X=East, Y=Up, Z=North is common)
+    private gpsOffsetVec3(userLat, userLon, userAlt, noteLat, noteLon, noteAlt) {
+        const metersPerDegLat = 111320;
+        const metersPerDegLon = 111320 * Math.cos((userLat * Math.PI) / 180);
+        print("Diffrence: " + (parseFloat(noteLon) - userLon))
+        const dx = (parseFloat(noteLon) - userLon) * metersPerDegLon;
+        const dz = (parseFloat(noteLat) - userLat) * metersPerDegLat;
+        const dy = parseFloat(noteAlt) - userAlt;
+      
         return new vec3(dx, dy, dz);
-    }
+      }
 
     // --- Simulation Test Function (Keep for debugging if needed) ---
     private async runSimulationTest() {
