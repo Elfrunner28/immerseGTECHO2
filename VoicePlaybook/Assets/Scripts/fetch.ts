@@ -83,6 +83,7 @@ export class FetchNote extends BaseScriptComponent {
  */
         // Get current location
         if (!this.initalized) {
+            this.initalized = true;
             this.locationExample.getData((pos) => {
                 log.d(`Location acquired: Lat ${pos.latitude}, Lon ${pos.longitude}`);
                 print(`Location acquired: Lat ${pos.latitude}, Lon ${pos.longitude}`);
@@ -91,7 +92,6 @@ export class FetchNote extends BaseScriptComponent {
                     pos.longitude,
                     pos.altitude || 0 // Use 0 if altitude is not available
                 );
-                this.initalized = true;
             });
         }
     }
@@ -133,6 +133,7 @@ export class FetchNote extends BaseScriptComponent {
                     return; // Skip this note if essential data is missing
                 }
                 print("checkpoint 5");
+                print("note.latitude: " + note.latitude)
                 const noteLat = parseFloat(note.latitude);
                 const noteLon = parseFloat(note.longitude);
                 const noteAlt = parseFloat(note.altitude || '0'); // Use 0 if altitude is missing
@@ -142,7 +143,7 @@ export class FetchNote extends BaseScriptComponent {
                     print("Skipping note due to invalid coordinate data: " + JSON.stringify(note));
                     return; // Skip if coordinates are not valid numbers
                 }
-                print("checkpoint 7");
+                print(`Datapoints: ${userLat}, ${userLon}, ${userAlt}, ${noteLat}, ${noteLon}, ${noteAlt}`);
                 // Calculate offset relative to the user
                 const offset = this.gpsOffsetVec3(
                     userLat, userLon, userAlt,
@@ -172,15 +173,16 @@ export class FetchNote extends BaseScriptComponent {
                 }
                 print("checkpoint 10");
                 // Add to list for potential cleanup later
-                this.instantiatedNotes.push(noteObj);
                 print("checkpoint 11");
                 // Position the note object relative to the user
                 // Scaling the offset might be needed depending on your scene scale
-                noteObj.getTransform().setWorldPosition(offset); // Adjust scaling if necessary (e.g., offset.uniformScale(0.1))
+                // // Adjust scaling if necessary (e.g., offset.uniformScale(0.1))
                 print("checkpoint 12");
                 log.d(`Instantiated note at offset: ${offset.toString()}`);
                 print(`Instantiated note at offset: ${offset.toString()}`);
-
+                noteObj.getTransform().setWorldPosition(offset); 
+                print("checkpoint 13: " + noteObj.getTransform().getWorldPosition());
+                
                 // --- Handle Text Content ---
                 const textComp = noteObj.getComponent("Component.Text3D") || noteObj.getComponent("Component.Text");
                 if (note.type === "text" && note.base64) {
@@ -201,7 +203,7 @@ export class FetchNote extends BaseScriptComponent {
                     }
                 }
                 // --- Handle Audio Content and Interaction ---
-                else if (note.type === "audio" && note.recordingUrl) {
+                else if (true && note.recordingUrl) {
                     if (textComp) {
                         // Set placeholder text for audio notes
                         textComp.text = "Audio note from " + (note.username || "someone");
@@ -264,6 +266,8 @@ export class FetchNote extends BaseScriptComponent {
                      log.w(`Unhandled note type: ${note.type} or missing data.`);
                      print(`Unhandled note type: ${note.type} or missing data.`);
                 }
+                noteObj.getTransform().setWorldPosition(offset); 
+                print("checkpoint 14: " +  offset.x);
             }); // End of notes.forEach
 
         } catch (error) {
@@ -283,9 +287,14 @@ export class FetchNote extends BaseScriptComponent {
         print("Diffrence: " + (parseFloat(noteLon) - userLon))
         const dx = (parseFloat(noteLon) - userLon) * metersPerDegLon;
         const dz = (parseFloat(noteLat) - userLat) * metersPerDegLat;
-        const dy = parseFloat(noteAlt) - userAlt;
-      
-        return new vec3(dx, dy, dz);
+        const dy = (parseFloat(noteAlt) - userAlt);
+
+        const x = parseFloat(dx.toString());
+        const y = parseFloat(dy.toString());
+        const z = parseFloat(dz.toString());
+
+        print("x: " + Math.round(x) + " y: " + Math.round(y) + " z: " + Math.round(z));
+        return new vec3(Math.round(x), Math.round(y), Math.round(z));
       }
 
     // --- Simulation Test Function (Keep for debugging if needed) ---
