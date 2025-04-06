@@ -306,7 +306,7 @@ export class FetchNote extends BaseScriptComponent {
         const userLon = -0.11999999731779099; // Example Lon
         const userAlt = 0;       // Example Alt
 
-        const url = `https://getnearbyrecordings-7qnob2z5uq-uc.a.run.app/?latitude=${userLat}&longitude=${userLon}&radiusFt=500`; // Increased radius for test
+        const url = `https://getnearbyrecordings-7qnob2z5uq-uc.a.run.app/?latitude=${0}&longitude=${0}&radiusFt=500`; // Increased radius for test
 
         try {
             const request = new Request(url, { method: "GET" });
