@@ -4,7 +4,18 @@
     - !<own> 88469ebc-fd25-487e-aa4b-624596346d7c
 - !<PassInfo/88469ebc-fd25-487e-aa4b-624596346d7c>
   CachedProperties:
-    []
+    - Port_Input2_N008:
+        typeIdx: 1
+        value: 0.000000
+    - PreviewEnabled:
+        typeIdx: 0
+        value: 0
+    - lineColor:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - lineWeight:
+        typeIdx: 1
+        value: 0.000000
   DepthWrite: true
   DepthTest: true
   DepthFunction: LessEqual
@@ -19,18 +30,7 @@
     []
   BlendMode: PremultipliedAlphaAuto
   Properties:
-    Port_Input2_N008:
-      typeIdx: 1
-      value: 0.000000
-    PreviewEnabled:
-      typeIdx: 0
-      value: 0
-    lineColor:
-      typeIdx: 5
-      value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-    lineWeight:
-      typeIdx: 1
-      value: 0.000000
+    {}
   Pass: !<reference> feda31ad-cc27-4a1c-9d16-b714ecd9bc2e
   RTCaster: false
   RTReceiver: false

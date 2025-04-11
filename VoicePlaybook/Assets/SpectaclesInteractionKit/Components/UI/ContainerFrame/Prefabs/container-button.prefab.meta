@@ -97,8 +97,7 @@
   BlendShapesEnabled: true
   BlendNormals: true
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 1.000000
+    {}
 - !<ObjectPrefabAssetData/ece5ab01-31cb-4c1a-a2fd-e70ea9e3268b>
   SourceRemaps:
     - 2ee0e86b-dbc4-487a-a609-ad8de51ebcba: dc242484-c409-4069-8fa9-2e5f7a33927a

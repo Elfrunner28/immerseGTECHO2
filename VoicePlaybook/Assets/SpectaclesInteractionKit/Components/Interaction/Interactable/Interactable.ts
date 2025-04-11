@@ -1,4 +1,3 @@
-import {
   DragInteractorEvent,
   InteractorEvent,
 } from "../../../Core/Interactor/InteractorEvent"

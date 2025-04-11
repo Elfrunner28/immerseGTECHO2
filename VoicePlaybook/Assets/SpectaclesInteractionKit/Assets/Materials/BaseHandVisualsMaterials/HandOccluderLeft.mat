@@ -4,7 +4,12 @@
     - !<own> 5e936fad-1e14-4eec-9265-cedbe816987f
 - !<PassInfo/5e936fad-1e14-4eec-9265-cedbe816987f>
   CachedProperties:
-    []
+    - PreviewEnabled:
+        typeIdx: 0
+        value: 0
+    - Tweak_N0:
+        typeIdx: 5
+        value: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
   DepthWrite: true
   DepthTest: true
   DepthFunction: LessEqual
@@ -19,10 +24,5 @@
     []
   BlendMode: PremultipliedAlphaAuto
   Properties:
-    PreviewEnabled:
-      typeIdx: 0
-      value: 0
-    Tweak_N0:
-      typeIdx: 5
-      value: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+    {}
   Pass: !<reference> f3d0656e-6b16-4118-a77a-f904e36b5554

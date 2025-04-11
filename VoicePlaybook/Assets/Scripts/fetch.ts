@@ -47,6 +47,8 @@ export class FetchNote extends BaseScriptComponent {
         // this.runSimulationTest(); // Uncomment if needed for testing
     }
 
+    
+
     onStart() {
         log.d("FetchNote Script Started");
         print("FetchNote Script Started");
@@ -158,6 +160,8 @@ export class FetchNote extends BaseScriptComponent {
                 }
                 print("checkpoint 9");
                 // --- Instantiate the Note Prefab ---
+
+                // Check if the notePrefab is assigned
                 if (!this.notePrefab) {
                     log.e("notePrefab is not assigned in the Inspector!");
                     print("notePrefab is not assigned in the Inspector!");

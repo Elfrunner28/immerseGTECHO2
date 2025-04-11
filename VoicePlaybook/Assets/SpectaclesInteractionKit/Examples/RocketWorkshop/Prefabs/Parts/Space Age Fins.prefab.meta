@@ -139,7 +139,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    edit34: 1.000000
+    {}
 - !<RenderMeshVisual/738c0a88-1412-428f-889f-0a6c69c82342>
   PrefabRemaps:
     []

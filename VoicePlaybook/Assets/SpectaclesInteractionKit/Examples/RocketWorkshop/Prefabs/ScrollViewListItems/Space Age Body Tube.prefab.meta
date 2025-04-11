@@ -641,8 +641,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 0.000000
+    {}
 - !<ScreenTransform/d2cf293b-586f-45c0-b3ad-0aa8d009bb62>
   PrefabRemaps:
     []

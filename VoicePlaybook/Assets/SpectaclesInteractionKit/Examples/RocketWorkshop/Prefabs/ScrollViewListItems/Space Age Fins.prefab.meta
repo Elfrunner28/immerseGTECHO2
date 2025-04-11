@@ -88,8 +88,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 0.000000
+    {}
 - !<SceneObject/1b893ed9-9171-4ad1-a824-d93aea2eaf31>
   PrefabRemaps:
     []

@@ -23,7 +23,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    edit34: 1.000000
+    {}
 - !<SceneObject/226033a6-f882-4719-accb-8fa66129d5c6>
   PrefabRemaps:
     []

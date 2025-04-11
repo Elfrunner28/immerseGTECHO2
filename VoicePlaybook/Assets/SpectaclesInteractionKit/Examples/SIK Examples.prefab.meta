@@ -175,8 +175,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 0.000000
+    {}
 - !<ScriptComponent/020b3588-3bcf-4758-b476-45b3bec1dee0>
   PrefabRemaps:
     []
@@ -835,7 +834,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<SceneObject/103db4ec-c666-441c-a028-b6b2b6e68161>
   PrefabRemaps:
     []
@@ -1163,7 +1162,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Size: 0.660000
+    {}
 - !<Text/1acd9a1e-d629-4ef4-b6aa-41e8f058cef7>
   PrefabRemaps:
     []
@@ -3067,7 +3066,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<ObjectPrefabAssetData/3c1a725d-5721-447b-9c77-4d091667a0e8>
   SourceRemaps:
     - 001ebd4f-3877-4182-94e0-a89a515f3f41: 7a6350dc-47f1-451c-9f9d-3fb105a108f2
@@ -4282,8 +4281,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 0.000000
+    {}
 - !<SceneObject/5375d021-64b7-4001-9dab-6d4c5b1058f5>
   PrefabRemaps:
     []
@@ -4873,7 +4871,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<ScreenTransform/6568d0a4-bda2-40a7-9ab0-12e4a88ce383>
   PrefabRemaps:
     []
@@ -5428,7 +5426,7 @@
   BlendShapesEnabled: true
   BlendNormals: true
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<ScriptComponent/70310025-8e8a-4e25-8b41-e33792529b82>
   PrefabRemaps:
     []
@@ -5555,7 +5553,7 @@
   BlendShapesEnabled: true
   BlendNormals: true
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<ScriptComponent/72d997be-576a-4fb8-a9f4-3a365ad48f6e>
   PrefabRemaps:
     []
@@ -7068,8 +7066,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 0.000000
+    {}
 - !<ScreenTransform/9e4a8f0e-c8c2-41a8-a396-4b48ed74b914>
   PrefabRemaps:
     []
@@ -7743,8 +7740,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch Horizontal: 0.000000
-    Pinch Vertical: 0.000000
+    {}
 - !<ScreenTransform/aeb3cb34-ad03-42ff-813f-06d99f0e8dbb>
   PrefabRemaps:
     []
@@ -8475,8 +8471,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
-    Z depth: 0.000000
+    {}
 - !<RenderMeshVisual/bfcde4b1-4d2d-4ea4-beb7-73d0c03a419a>
   PrefabRemaps:
     []
@@ -8496,7 +8491,7 @@
   BlendShapesEnabled: true
   BlendNormals: true
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<SceneObject/c01d16e8-ddfa-4261-9fa8-8bdef255e95f>
   PrefabRemaps:
     []
@@ -10235,7 +10230,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    Pinch: 0.000000
+    {}
 - !<SceneObject/ea88dc4a-5eca-4109-b291-c463af394b19>
   PrefabRemaps:
     []

@@ -74,7 +74,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    edit34: 1.000000
+    {}
 - !<SceneObject/2f810cf2-0924-49ba-8ed4-810f505f5c4e>
   PrefabRemaps:
     []
@@ -139,7 +139,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    edit34: 1.000000
+    {}
 - !<LookAtComponent/54be41ea-d584-4764-9f28-592804c8cc59>
   PrefabRemaps:
     []
@@ -227,7 +227,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    edit34: 1.000000
+    {}
 - !<SceneObject/a0975925-b644-4b9c-b9ba-15c9efad9516>
   PrefabRemaps:
     []

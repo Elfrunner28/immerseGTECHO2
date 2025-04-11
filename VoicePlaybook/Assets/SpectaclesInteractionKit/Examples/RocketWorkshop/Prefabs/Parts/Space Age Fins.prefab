@@ -102,7 +102,7 @@
   BlendShapesEnabled: true
   BlendNormals: false
   BlendShapes:
-    edit34: 1.000000
+    {}
 - !<VFXComponent/7c05884d-7049-42a1-8b75-e82cb3a903d2>
   PrefabRemaps:
     []
